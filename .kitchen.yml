@@ -6,7 +6,7 @@ provisioner:
     name                   : ansible_push
     verbose                : "vvvv"
     ansible_config         : "test/ansible.cfg"
-    idempotency_test       : True
+    idempotency_test       : false
     sudo                   : <%= if ENV['TRAVIS'] then 'True' else 'False' end  %>
 
 platforms:

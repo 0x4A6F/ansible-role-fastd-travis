@@ -1,6 +1,6 @@
 ---
 - name         : Install and configure fastd (defaults)
-  hosts        : "{{ kitchen_hosts }}"
+  hosts        : "all"
   gather_facts : yes
   become       : true
   connection   : "{{ kitchen_connection | default('local') }}"

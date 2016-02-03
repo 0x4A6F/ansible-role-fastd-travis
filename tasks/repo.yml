@@ -1,10 +1,10 @@
 ---
 # tasks file for repo-universe-factory
 
-- name: Check architecture
-  when: ansible_architecture != 'i386' and ansible_architecture != 'amd64' and ansible_architecture !='x86_64'
-  set_fact: 
-    repo_universe_factory_unsupported_architecture: true
+#- name: Check architecture
+#  when: ansible_architecture != 'i386' and ansible_architecture != 'amd64' and ansible_architecture !='x86_64'
+#  set_fact: 
+#    repo_universe_factory_unsupported_architecture: true
 
 - name: Check Distro
   when: ansible_distribution != "Debian" and ansible_distribution != "Ubuntu"

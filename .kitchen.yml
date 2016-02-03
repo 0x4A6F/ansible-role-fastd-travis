@@ -1,10 +1,6 @@
 ---
 driver                     :
     name                   : <%= if ENV['TRAVIS'] then 'localhost' else 'vagrant' end  %>
-    box                    : "ubuntu/trusty64"
-    customize              :
-         cpus              : 2
-         memory            : 2048 
 
 provisioner:
     name                   : ansible_push
@@ -16,31 +12,33 @@ provisioner:
     extra_vars             : { 'kitchen_connection': '<%= if ENV["TRAVIS"] then "local" else "smart" end %>', 'kitchen_hosts': '<%= if ENV["TRAVIS"] then "localhost" else "all" end %>' }
 
 platforms:
-  - name                   : "ubuntu-trusty-ansible-v1"
+  - name                   : <%= if ENV['TRAVIS'] then 'travis' else 'ubuntu-14.04' end %>
     provisioner            :
-      ansible-playbook_bin : "ansible-version set v1 > /dev/null && ansible-playbook"
-
-  - name                   : "ubuntu-trusty-ansible-v2"
-    provisioner            :
-      ansible-playbook_bin : "ansible-version set v2 > /dev/null && ansible-playbook"
+      raw_arguments        : <%= if ENV['TRAVIS'] then '-c local' else '' end %>
+    # Should be safily ignored by Travis since connection local
+    driver                 :
+      box                  : ubuntu/trusty64
+    customize              :
+      cpus                 : 2
+      memory               : 2048
 
 suites:
   - name                   : fastd
     provisioner            :
       playbook             : "test/application/fastd.yml"
-      extra_vars           : {'kitchen_connection': 'smart'}
+      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
 
   - name                   : fastd-enabled
     provisioner            :
       playbook             : "test/application/fastd-enabled.yml"
-      extra_vars           : {'kitchen_connection': 'smart'}
+      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
 
   - name                   : fastd-disabled
     provisioner            :
       playbook             : "test/application/fastd-disabled.yml"
-      extra_vars           : {'kitchen_connection': 'smart'}
+      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
 
   - name                   : fastd-removed
     provisioner            :
       playbook             : "test/application/fastd-removed.yml"
-      extra_vars           : {'kitchen_connection': 'smart'}
+      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }

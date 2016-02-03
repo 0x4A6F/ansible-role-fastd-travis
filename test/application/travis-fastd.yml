@@ -3,7 +3,6 @@
   hosts        : "{{ kitchen_hosts }}"
   gather_facts : yes
   user         : travis
-  become       : true
   connection   : "{{ kitchen_connection | default('local') }}"
   vars_files   :
                  - "fastd_pkg_vars.yml"

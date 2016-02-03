@@ -1,6 +1,7 @@
 ---
 # declarative role
 status: enabled
+purge: no
 
 # defaults file for fastd
 fastd_repo: http://git.universe-factory.net/fastd/

@@ -1,8 +1,7 @@
 ---
-- name         : Install and configure fastd (status: enabled)
+- name         : Install and configure fastd (enabled)
   hosts        : "all"
   gather_facts : yes
-  become       : true
   connection   : "{{ kitchen_connection | default('local') }}"
   vars_files   :
                  - "fastd_pkg_vars.yml"

@@ -4,8 +4,5 @@
 - name: remove fastd
   apt: name=fastd state=absent
 
-- shell: ls -1 /etc/fastd
-  register: contents
-
-- file: path=/etc/fastd/{{ item }} state=absent
-  with_items: contents.stdout_lines
+- file: path=/etc/fastd state=absent
+  when: purge == true

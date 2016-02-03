@@ -1,6 +1,6 @@
 - name: Install libuecc via Apt
   when: repo_universe_factory_available
-  apt: name={{item}} state=latest update_cache=yes
+  apt: name={{item}} state=latest
   with_items:
   - libuecc0
   - libuecc-dev

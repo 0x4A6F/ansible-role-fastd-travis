@@ -1,6 +1,9 @@
 ---
 # declarative ansible role
 
+#- name: Gather facts
+#  setup:
+
 # Remove everything created by this role.
 - name: Switching to status removed
   include: removed.yml

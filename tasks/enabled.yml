@@ -1,4 +1,3 @@
----
 # status: enabled
 
 # tasks file for fastd
@@ -9,7 +8,8 @@
 
 - include: libuecc/main.yml
 
-- include: enabled-{{ ansible_os_family }}.yml
+- include: 'enabled-Debian.yml'
+  when: ansible_os_family == 'Debian'
 
 - name: Create fastd config directories
   file: path=/etc/fastd/{{item.name}} state=directory recurse=yes

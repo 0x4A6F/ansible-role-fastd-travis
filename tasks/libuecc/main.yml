@@ -1,8 +1,8 @@
 ---
 # tasks file for libsodium
 
-- include: debian.yml
+- include: Debian.yml
   when: ansible_distribution == "Ubuntu"
 
-- include: debian.yml
+- include: Debian.yml
   when: ansible_distribution == "Debian"

@@ -2,8 +2,8 @@
 - name         : Install and configure fastd
   hosts        : localhost
   user         : travis
-  gather_facts : no
-  become       : True
+  sudo         : true
+  gather_facts : true
   connection   : "{{ kitchen_connection | default('local') }}"
   vars_files   :
                  - "fastd_pkg_vars.yml"

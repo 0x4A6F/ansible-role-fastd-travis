@@ -1,7 +1,8 @@
 ---
-- name         : Install and configure fastd
+- name         : Install and configure fastd (defaults)
   hosts        : "all"
-  gather_facts : yes
+  gather_facts : no
+  become       : True
   connection   : "{{ kitchen_connection | default('local') }}"
   vars_files   :
                  - "fastd_pkg_vars.yml"

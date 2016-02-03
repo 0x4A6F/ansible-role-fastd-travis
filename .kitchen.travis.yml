@@ -13,7 +13,7 @@ provisioner:
 platforms:
     - name                      : travis
       provisioner               :
-        raw_arguments           : "-c local"
+        raw_arguments           : "--connection=local --sudo"
 
 suites:
   - name            : fastd

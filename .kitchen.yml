@@ -1,40 +1,46 @@
 ---
-driver                    :
-    name                  : <%= if ENV['TRAVIS'] then 'localhost' else 'vagrant' end  %>
-    box                   : "ubuntu/trusty64"
-    customize             :
-         cpus             : 2
-         memory           : 2048 
+driver                     :
+    name                   : <%= if ENV['TRAVIS'] then 'localhost' else 'vagrant' end  %>
+    box                    : "ubuntu/trusty64"
+    customize              :
+         cpus              : 2
+         memory            : 2048 
 
 provisioner:
-    name                  : ansible_push
-    verbose               : "vvvv"
-    ansible_config        : "test/ansible.cfg"
-    idempotency_test      : False
-    sudo                  : <%= if ENV['TRAVIS'] then 'True' else 'False' end  %>
-    raw_arguments         : <%= if ENV['TRAVIS'] then '-c local' else '' end %>
-    extra_vars            : { 'kitchen_connection': '<%= if ENV["TRAVIS"] then "local" else "smart" end %>', 'kitchen_hosts': '<%= if ENV["TRAVIS"] then "localhost" else "all" end %>' }
+    name                   : ansible_push
+    verbose                : "vvvv"
+    ansible_config         : "test/ansible.cfg"
+    idempotency_test       : True
+    sudo                   : <%= if ENV['TRAVIS'] then 'True' else 'False' end  %>
+    raw_arguments          : <%= if ENV['TRAVIS'] then '-c local' else '' end %>
+    extra_vars             : { 'kitchen_connection': '<%= if ENV["TRAVIS"] then "local" else "smart" end %>', 'kitchen_hosts': '<%= if ENV["TRAVIS"] then "localhost" else "all" end %>' }
 
 platforms:
-    - name: Ubuntu-precise
-      driver:
-        box: ubuntu/precise64
-    - name: Debian-jessie
-      driver:
-        box: debian/jessie64
-    - name: Debian-wheezy
-      driver:
-        box: debian/wheezy64
-    - name: Ubuntu-trusty
-      driver:
-        box: ubuntu/trusty64
+  - name                   : "ubuntu-trusty-ansible-v1"
+    provisioner            :
+      ansible-playbook_bin : "ansible-version set v1 > /dev/null && ansible-playbook"
+
+  - name                   : "ubuntu-trusty-ansible-v2"
+    provisioner            :
+      ansible-playbook_bin : "ansible-version set v2 > /dev/null && ansible-playbook"
 
 suites:
-  - name: fastd
-    provisioner:
-      playbook: "test/application/fastd.yml"
-      extra_vars: {'kitchen_connection': 'smart'}
-#  - name            : group
-#    provisioner     :
-#        playbook    : "test/application/group.yml"
-#        extra_vars  : { 'kitchen_connection': 'smart' }
+  - name                   : fastd
+    provisioner            :
+      playbook             : "test/application/fastd.yml"
+      extra_vars           : {'kitchen_connection': 'smart'}
+
+  - name                   : fastd-enabled
+    provisioner            :
+      playbook             : "test/application/fastd-enabled.yml"
+      extra_vars           : {'kitchen_connection': 'smart'}
+
+  - name                   : fastd-disabled
+    provisioner            :
+      playbook             : "test/application/fastd-disabled.yml"
+      extra_vars           : {'kitchen_connection': 'smart'}
+
+  - name                   : fastd-removed
+    provisioner            :
+      playbook             : "test/application/fastd-removed.yml"
+      extra_vars           : {'kitchen_connection': 'smart'}

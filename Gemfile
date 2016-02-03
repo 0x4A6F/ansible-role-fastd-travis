@@ -1,7 +1,8 @@
 source "https://rubygems.org"
 
-gem "test-kitchen"
-gem "kitchen-ansiblepush"
-gem "kitchen-ansible"
-gem "kitchen-vagrant"
-gem "kitchen-localhost"
+group :development do
+  gem 'test-kitchen"
+  gem 'kitchen-vagrant'
+  gem 'kitchen-ansiblepush'
+  gem 'kitchen-localhost'
+end

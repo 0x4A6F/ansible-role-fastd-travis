@@ -8,8 +8,6 @@ provisioner:
     ansible_config         : "test/ansible.cfg"
     idempotency_test       : True
     sudo                   : <%= if ENV['TRAVIS'] then 'True' else 'False' end  %>
-    raw_arguments          : <%= if ENV['TRAVIS'] then '-c local' else '' end %>
-    extra_vars             : { 'kitchen_connection': '<%= if ENV["TRAVIS"] then "local" else "smart" end %>', 'kitchen_hosts': '<%= if ENV["TRAVIS"] then "localhost" else "all" end %>' }
 
 platforms:
   - name                   : <%= if ENV['TRAVIS'] then 'travis' else 'ubuntu-14.04' end %>

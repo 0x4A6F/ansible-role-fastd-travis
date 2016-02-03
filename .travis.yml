@@ -17,11 +17,10 @@ script:
   - ansible --version
   - export TRAVIS=True
   - bundle install
-# - KITCHEN_YAML=.kitchen.travis.yml bundle exec kitchen test
 # - echo localhost > inventory
   - ansible-playbook -i test/inventory --syntax-check test/application/fastd.yml
   - ansible-playbook -i test/inventory --connection=local --sudo -vvvv test/application/fastd.yml
-  - bundle exec kitchen test
+  - KITCHEN_YAML=.kitchen.travis.yml bundle exec kitchen test travis
 
 after_success:
   - echo "Success"

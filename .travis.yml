@@ -17,6 +17,7 @@ install:
 
 script:
   - ansible --version
+  # Make sure, that TRAVIS is set (https://docs.travis-ci.com/user/environment-variables#Default-Environment-Variables)
   - export TRAVIS=True
   - export SITE=test/application/fastd.yml
   - export INVENTORY=test/inventory

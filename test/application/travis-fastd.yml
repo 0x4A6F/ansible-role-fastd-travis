@@ -1,6 +1,6 @@
 ---
 - name         : Install and configure fastd
-  hosts        : "all"
+  hosts        : "{{ kitchen_hosts }}"
   user         : travis
   become       : true
   gather_facts : true

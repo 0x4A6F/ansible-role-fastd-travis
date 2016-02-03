@@ -26,17 +26,17 @@ suites:
       playbook             : "test/application/<%= if ENV['TRAVIS'] then 'travis-' else '' end  %>fastd.yml"
       extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
 
-#  - name                   : fastd-removed
-#    provisioner            :
-#      playbook             : "test/application/fastd-removed.yml"
-#      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
+  - name                   : fastd-removed
+    provisioner            :
+      playbook             : "test/application/fastd-removed.yml"
+      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
 
-#  - name                   : fastd-disabled
-#    provisioner            :
-#      playbook             : "test/application/fastd-disabled.yml"
-#      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
+  - name                   : fastd-disabled
+    provisioner            :
+      playbook             : "test/application/fastd-disabled.yml"
+      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
 
-#  - name                   : fastd-enabled
-#    provisioner            :
-#      playbook             : "test/application/fastd-enabled.yml"
-#      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
+  - name                   : fastd-enabled
+    provisioner            :
+      playbook             : "test/application/fastd-enabled.yml"
+      extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }

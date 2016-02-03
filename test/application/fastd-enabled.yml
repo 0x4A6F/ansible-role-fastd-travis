@@ -1,0 +1,10 @@
+---
+- name         : Install and configure fastd (status: enabled)
+  hosts        : "all"
+  gather_facts : yes
+  become       : true
+  connection   : "{{ kitchen_connection | default('local') }}"
+  vars_files   :
+                 - "fastd_pkg_vars.yml"
+  roles        :
+                 - { role: "ansible-role-fastd-travis", status: 'enabled' }

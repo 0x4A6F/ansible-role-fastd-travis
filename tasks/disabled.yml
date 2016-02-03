@@ -1,0 +1,5 @@
+# status: disabled
+
+# Disable startup and stop service
+- name: disable and stop fastd
+  service: name=fastd enabled=no state=stopped

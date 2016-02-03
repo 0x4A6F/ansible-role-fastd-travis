@@ -14,11 +14,12 @@ install:
 
 
 script:
-    #- cd test
-    - ansible --version
-    - bundle install
-    - KITCHEN_YAML=.kitchen.travis.yml bundle exec kitchen test travis
+  - cd $TRAVIS_BUILD_DIR/
+  - ansible --version
+  - bundle install
+  - export TRAVIS=True
+  - KITCHEN_YAML=.kitchen.travis.yml bundle exec kitchen test
 
 
 after_success:
-    - echo "Success"
+  - echo "Success"

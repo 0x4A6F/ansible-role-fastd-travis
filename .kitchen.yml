@@ -13,7 +13,7 @@ platforms:
   - name                   : <%= if ENV['TRAVIS'] then 'travis' else 'ubuntu-14.04' end %>
     provisioner            :
       raw_arguments        : <%= if ENV['TRAVIS'] then '-c local' else '' end %>
-    # Should be safily ignored by Travis since connection local
+    # Should be safely ignored by Travis since connection local
     driver                 :
       box                  : ubuntu/trusty64
     customize              :

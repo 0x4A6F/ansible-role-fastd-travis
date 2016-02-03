@@ -12,7 +12,7 @@ before_install:
   - git clone https://github.com/AutomationWithAnsible/ansible-setup.git
 
 install:
-  - /tmp/ansible-setup/example/travis-test.sh
+  - /tmp/ansible-setup/example/travis-install
   - cd $TRAVIS_BUILD_DIR/
   - gem install bundler
   - bundle install

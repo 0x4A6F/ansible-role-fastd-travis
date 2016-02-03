@@ -1,9 +1,10 @@
 ---
 - name         : Install and configure fastd
   hosts        : localhost
+  user         : travis
   gather_facts : yes
   connection   : "{{ kitchen_connection | default('local') }}"
   vars_files   :
                  - "fastd_pkg_vars.yml"
   roles        :
-                 - "../../../ansible-role-fastd-travis"
+                 - "ansible-role-fastd-travis"

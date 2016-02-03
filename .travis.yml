@@ -18,6 +18,9 @@ script:
   - export TRAVIS=True
   - bundle install
 # - KITCHEN_YAML=.kitchen.travis.yml bundle exec kitchen test
+  - echo localhost > inventory
+  - ansible-playbook -i inventory --syntax-check tasks/main.yml
+  - ansible-playbook -i inventory --connection=local --sudo -vvvv tasks/main.yml
   - bundle exec kitchen test travis
 
 after_success:

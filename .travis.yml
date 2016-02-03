@@ -5,8 +5,8 @@ language: python
 python: "2.7"
 
 env:
-  - SITE=test/application/fastd.yml
-  - INVENTORY=test/inventory
+  - SITE=
+  - INVENTORY=
 
 before_install:
   # Make sure everything's up to date.
@@ -26,12 +26,12 @@ script:
   - export TRAVIS=True
 #  - export ANSIBLE_CONFIG="test/ansible.cfg"
   - bundle install
-# - echo localhost > $INVENTORY
-  - ansible-playbook -i $INVENTORY --syntax-check $SITE
-  - ansible-playbook -i $INVENTORY --connection=local --sudo -vvvv $SITE
+# - echo localhost > test/inventory
+  - ansible-playbook -i test/inventory --syntax-check test/application/fastd.yml
+  - ansible-playbook -i test/inventory --connection=local --sudo -vvvv test/application/fastd.yml
 # Run the role/playbook again, checking to make sure it's idempotent.
 #  - >
-#    ansible-playbook -i $INVENTORY $SITE --connection=local --sudo
+#    ansible-playbook -i test/inventory test/application/fastd.yml --connection=local --sudo
 #    | grep -q 'changed=0.*failed=0'
 #    && (echo 'Idempotence test: pass' && exit 0)
 #    || (echo 'Idempotence test: fail' && exit 1)

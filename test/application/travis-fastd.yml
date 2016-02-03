@@ -2,7 +2,7 @@
 - name         : Install and configure fastd
   hosts        : "{{ kitchen_hosts }}"
   user         : travis
-  sudo         : true
+  become       : true
   gather_facts : true
   connection   : "{{ kitchen_connection | default('local') }}"
   vars_files   :

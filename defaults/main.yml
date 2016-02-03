@@ -1,4 +1,7 @@
 ---
+# declarative role
+status: enabled
+
 # defaults file for fastd
 fastd_repo: http://git.universe-factory.net/fastd/
 fastd_repo_tag: v17

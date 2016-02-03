@@ -23,9 +23,11 @@ script:
 #  - export ANSIBLE_CONFIG="test/ansible.cfg"
   - bundle install
 # - echo localhost > test/inventory
+  # Check the role/playbook's syntax.
   - ansible-playbook -i test/inventory --syntax-check test/application/fastd.yml
+  # Run the role/playbook with ansible-playbook.
   - ansible-playbook -i test/inventory --connection=local --sudo -vvvv test/application/fastd.yml
-# Run the role/playbook again, checking to make sure it's idempotent.
+  # Travis CI's environment requires one _extra_ run for true idempotence :-/.
 #  - >
 #    ansible-playbook -i test/inventory test/application/fastd.yml --connection=local --sudo
 #    | grep -q 'changed=0.*failed=0'

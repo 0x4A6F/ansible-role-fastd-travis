@@ -7,4 +7,4 @@
   vars_files   :
                  - "fastd_pkg_vars.yml"
   roles        :
-                 - "ansible-role-fastd-travis"
+                 - "travis-debug"

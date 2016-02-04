@@ -13,8 +13,9 @@ before_install:
 
 install:
   # Install Ansible.
+  - sudo pip install ansible
 # - sudo pip install 'ansible>=1.9.3,<2.0.2'
-  - sudo pip install 'ansible>=1.9.3'
+
 
 script:
   - ansible --version
@@ -31,11 +32,11 @@ script:
   - ansible-playbook -i $INVENTORY $SITE --syntax-check 
 
   # Run the role/playbook with ansible-playbook.
-  - echo "***************************** RUN PLAY 1 $SITE (2) *****************************"    
+  - echo "***************************** RUN PLAY 1 $SITE (2) *****************************"
   - ansible-playbook -i $INVENTORY $SITE --sudo -vvvv
 
   # One _extra_ run for true idempotence test.
- - echo "***************************** Idempotence test $SITE (3) *****************************" 
+  - echo "***************************** Idempotence test $SITE (3) *****************************"
   - >
     ansible-playbook -i $INVENTORY $SITE --sudo -vvvv | tee ansible_output
     | grep -q 'changed=0.*failed=0'
@@ -49,9 +50,9 @@ after_success:
   - echo "Success"
 
 after_failure:
-    - echo "****** Idempotence Log *******" 
-    - sudo cat ansible_output
-    - echo "****** Syslog *******"
-    - sudo cat /var/log/syslog
-    - echo "****** AnsibleFacts *******"    
-    - ansible -i 127.0.0.1, -m setup all -c local
+  - echo "****** Idempotence Log *******"
+  - sudo cat ansible_output
+  - echo "****** Syslog *******"
+  - sudo cat /var/log/syslog
+  - echo "****** AnsibleFacts *******"
+  - ansible -i 127.0.0.1, -m setup all -c local

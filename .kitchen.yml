@@ -23,8 +23,7 @@ platforms:
 suites:
   - name                   : fastd
     provisioner            :
-      playbook             : "test/application/fastd.yml"
-#      playbook             : "test/application/<%= if ENV['TRAVIS'] then 'travis-' else '' end  %>fastd.yml"
+      playbook             : "test/application/<%= if ENV['TRAVIS'] then 'travis-' else '' end  %>fastd.yml"
       extra_vars           : { 'kitchen_connection': 'smart', 'kitchen_hosts': '<%= if ENV['TRAVIS'] then 'localhost' else 'all' end %>' }
 
   - name                   : fastd-removed

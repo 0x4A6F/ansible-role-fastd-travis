@@ -8,7 +8,7 @@ before_install:
   # Make sure everything's up to date.
   - sudo apt-get update -qq
   # Install required dependencies
-  - sudo apt-get install -qq git python-apt python-pycurl git ruby ruby-dev build-essential autoconf
+  - sudo apt-get install -qq git python-apt python-pycurl python-pip git ruby ruby-dev
   - gem install bundler
 
 install:
@@ -20,20 +20,23 @@ script:
   # Make sure, that TRAVIS is set (https://docs.travis-ci.com/user/environment-variables#Default-Environment-Variables)
   - export TRAVIS=True
   - export SITE=test/application/fastd.yml
-  - export INVENTORY=test/inventory
+  - export INVENTORY=test/local.ini
   - export ANSIBLE_CONFIG=test/ansible.cfg
   - bundle install
 
 # Tests
   # Check the role/playbook's syntax.
+  - echo "***************************** SYNTAX CHECK $SITE (1) *****************************"
   - ansible-playbook -i $INVENTORY $SITE --syntax-check 
 
   # Run the role/playbook with ansible-playbook.
-  - ansible-playbook -i $INVENTORY $SITE --connection=local --sudo -vvvv
+  - echo "***************************** RUN PLAY 1 $SITE (2) *****************************"    
+  - ansible-playbook -i $INVENTORY $SITE --sudo -vvvv
 
-  # Travis CI's environment requires one _extra_ run for true idempotence :-/.
+  # One _extra_ run for true idempotence test.
+ - echo "***************************** Idempotence test $SITE (3) *****************************" 
   - >
-    ansible-playbook -i $INVENTORY $SITE --connection=local --sudo
+    ansible-playbook -i $INVENTORY $SITE --sudo -vvvv | tee ansible_output
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
@@ -43,3 +46,11 @@ script:
 
 after_success:
   - echo "Success"
+
+after_failure:
+    - echo "****** Idempotence Log *******" 
+    - sudo cat ansible_output
+    - echo "****** Syslog *******"
+    - sudo cat /var/log/syslog
+    - echo "****** AnsibleFacts *******"    
+    - ansible -i 127.0.0.1, -m setup all -c local

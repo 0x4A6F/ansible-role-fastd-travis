@@ -1,6 +1,6 @@
 ---
 - name         : Install and configure fastd
-  hosts        : localhost
+  hosts        : "{{ kitchen_hosts }}"
   gather_facts : yes
   user         : travis
   connection   : "{{ kitchen_connection | default('local') }}"

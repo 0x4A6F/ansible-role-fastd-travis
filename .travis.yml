@@ -34,21 +34,22 @@ script:
   - ansible-playbook -i $INVENTORY $SITE --sudo -vvvv
 
   # One _extra_ run for true idempotence test.
+  - ansible-playbook -i $INVENTORY $SITE --sudo
   - >
-    ansible-playbook -i $INVENTORY $SITE --sudo -vvvv | tee ansible_output
+    ansible-playbook -i $INVENTORY $SITE --sudo| tee ansible_idempotence
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Run test-kitchen
-  - bundle exec kitchen verify
+  - bundle exec kitchen test
 
 after_success:
   - echo "Success"
 
 after_failure:
   # idempotence log
-  - sudo cat ansible_output
+  - sudo cat ansible_idempotence
   # syslog
   - sudo cat /var/log/syslog
   # AnsibleFacts

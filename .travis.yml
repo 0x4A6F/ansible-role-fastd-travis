@@ -28,15 +28,12 @@ script:
 
 # Tests
   # Check the role/playbook's syntax.
-  - echo "***************************** SYNTAX CHECK $SITE (1) *****************************"
   - ansible-playbook -i $INVENTORY $SITE --syntax-check 
 
   # Run the role/playbook with ansible-playbook.
-  - echo "***************************** RUN PLAY 1 $SITE (2) *****************************"
   - ansible-playbook -i $INVENTORY $SITE --sudo -vvvv
 
   # One _extra_ run for true idempotence test.
-  - echo "***************************** Idempotence test $SITE (3) *****************************"
   - >
     ansible-playbook -i $INVENTORY $SITE --sudo -vvvv | tee ansible_output
     | grep -q 'changed=0.*failed=0'
@@ -50,9 +47,9 @@ after_success:
   - echo "Success"
 
 after_failure:
-  - echo "****** Idempotence Log *******"
+  # idempotence log
   - sudo cat ansible_output
-  - echo "****** Syslog *******"
+  # syslog
   - sudo cat /var/log/syslog
-  - echo "****** AnsibleFacts *******"
+  # AnsibleFacts
   - ansible -i 127.0.0.1, -m setup all -c local

@@ -1,0 +1,4 @@
+# status: installed
+
+- include: installed-fastd-Debian.yml
+  when: ansible_os_family == 'Debian'

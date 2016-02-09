@@ -1,8 +1,4 @@
 # status: removed
 
-# apt -> {{ packager }} packagename -> {{ package }}, preferably a list with packages to deinstall
-- name: remove fastd
-  apt: name=fastd state=absent
-
-- file: path=/etc/fastd state=absent
-  when: purge == true
+- name: Remove configuration
+  file: path=/etc/fastd state=absent

@@ -1,4 +1,4 @@
-- name: Install libsodium via Apt
+- name: Install libsodium via apt
   when: repo_universe_factory_available
   apt: name={{item}} state=latest
   with_items:
@@ -6,11 +6,11 @@
   - libsodium-dev
 
 - name: Install build dependencies for libsodium
-  when: not repo_universe_factory_available
+  when: not repo_universe_factory_available and ansible_distribution == "Debian"
   apt: name={{item}} state=present
   with_items:
   - build-essential
   - autoconf
 
-- include: source.yml
+- include: installed-libsodium-from-source.yml
   when: not repo_universe_factory_available

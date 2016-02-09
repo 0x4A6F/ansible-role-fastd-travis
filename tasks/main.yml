@@ -4,17 +4,32 @@
 #- name: Gather facts
 #  setup:
 
-# Remove everything created by this role.
-- name: Switching to status removed
-  include: removed.yml
-  when: status == 'removed'
+# Enable and deploy this role
+- name: Switching to status enabled
+  include: enabled.yml
+  when: status == 'enabled'
 
 # Disable this role
 - name: Switching to status disabled
   include: disabled.yml
   when: status == 'disabled'
 
-# Enable and deploy this role
-- name: Switching to status enabled
-  include: enabled.yml
-  when: status == 'enabled'
+# Configure packages for this role.
+- name: Switching to status configured
+  include: configured.yml
+  when: status == 'configured'
+
+# Install packages for this role.
+- name: Switching to status installed
+  include: installed.yml
+  when: status == 'installed'
+
+# Deinstall packages installed with this role.
+- name: Switching to status deinstalled
+  include: deinstalled.yml
+  when: status == 'deinstalled'
+
+# Remove everything created by this role.
+- name: Switching to status removed
+  include: removed.yml
+  when: status == 'removed'

@@ -1,0 +1,8 @@
+# status: deinstalled
+
+- name: Deinstall ansible-role-fastd packages
+  apt: name={{item}} state=absent
+  with_items:
+    - fastd
+    - libuecc
+    - libsodium

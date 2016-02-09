@@ -13,5 +13,5 @@
   - build-essential
   - git
 
-- include: source.yml
+- include: installed-libuecc-from-source.yml
   when: not repo_universe_factory_available

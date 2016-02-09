@@ -1,8 +1,8 @@
 ---
 # tasks file for libsodium
 
-- include: Ubuntu.yml
+- include: installed-libuecc-Debian.yml
   when: ansible_distribution == "Ubuntu"
 
-- include: Debian.yml
+- include: installed-libuecc-Debian.yml
   when: ansible_distribution == "Debian"

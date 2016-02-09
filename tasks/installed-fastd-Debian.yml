@@ -22,12 +22,12 @@
     dest: /etc/default/rng-tools
     line: HRNGDEVICE=/dev/urandom
 
-- include: source.yml
+- include: installed-fastd-from-source.yml
   when: not repo_universe_factory_available
 
 - name: Download backported libjson-c2
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_major_version|int < 14
-  get_url: 
+  get_url:
     url="{{ fastd_libjson_url }}"
     dest="/tmp/libjson-c2.deb"
 
@@ -38,6 +38,3 @@
 - name: Install fastd via Apt
   when: repo_universe_factory_available
   apt: name=fastd state=latest
-
-- name: Add fastd user
-  user: createhome=no system=yes shell={{fastd_user_shell}} name={{fastd_user_name}}

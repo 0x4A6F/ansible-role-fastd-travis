@@ -1,0 +1,11 @@
+# status: installed
+
+# subtasks 'installed' for fastd
+
+- include: installed-repo.yml
+
+- include: installed-libsodium.yml
+
+- include: installed-libuecc.yml
+
+- include: installed-fastd.yml

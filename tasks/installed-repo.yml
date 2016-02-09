@@ -3,7 +3,7 @@
 
 #- name: Check architecture
 #  when: ansible_architecture != 'i386' and ansible_architecture != 'amd64' and ansible_architecture !='x86_64'
-#  set_fact: 
+#  set_fact:
 #    repo_universe_factory_unsupported_architecture: true
 
 - name: Check Distro
@@ -31,6 +31,6 @@
   when: repo_universe_factory_available
   apt_key: keyserver=pgpkeys.mit.edu id=16EF3F64CB201D9C
 
-- name: Add Universe Factory Apt Repository 
+- name: Add Universe Factory Apt Repository
   when: repo_universe_factory_available
   apt_repository: repo='deb http://repo.universe-factory.net/debian/ sid main' state=present update_cache=yes

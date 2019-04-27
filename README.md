@@ -18,7 +18,7 @@ Variable | Description | Default
 fastd_repo | If building from source the git repo to checkout from | http://git.universe-factory.net/fastd/
 fastd_repo_tag | If building from source, the git tag or branch to checkout | v17
 fastd_build_dir | If building from source, the directory where the sources are build | /usr/src/fastd-build
-fastd_install_from_source | Wether to build from source, this is set automatically if necessary | false
+fastd_install_from_source | Whether to build from source, this is set automatically if necessary | false
 fastd_user_name | The user which should be created for fastd | fastd
 fastd_user_shell | Shell for the fastd user | /bin/false
 libsodum_src_url | If building from source, where to find the source tar ball | https://download.libsodium.org/libsodium/releases/libsodium-{{libsodum_version}}.tar.gz
